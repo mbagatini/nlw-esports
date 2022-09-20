@@ -53,6 +53,20 @@ app.get("/games/:id/ads", async (req: Request, res: Response) => {
 	return res.json(formattedResponse);
 });
 
+app.get("/ads", async (req: Request, res: Response) => {
+	const response = await prisma.ad.findMany();
+
+	const formattedResponse = response.map(ad => {
+		return {
+			...ad,
+			hourStart: convertMinutesToHoursString(ad.hourStart),
+			hourEnd: convertMinutesToHoursString(ad.hourEnd),
+		}
+	});
+
+	return res.json(formattedResponse);
+});
+
 
 
 app.listen(3333, () => {

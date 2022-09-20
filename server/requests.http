@@ -2,5 +2,9 @@
 GET http://localhost:3333/games HTTP/1.1
 
 ###
+# List all ads
+GET http://localhost:3333/ads HTTP/1.1
+
+###
 # List ads for a specific game
 GET http://localhost:3333/games/80848e26-164b-4e28-8d01-64028fe5f3d4/ads HTTP/1.1
