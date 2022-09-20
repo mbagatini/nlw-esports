@@ -13,3 +13,17 @@ GET http://localhost:3333/games/80848e26-164b-4e28-8d01-64028fe5f3d4/ads HTTP/1.
 # Get the discord username for the given ad
 GET http://localhost:3333/ads/4524a2eb-61f8-4b76-aa52-524c898a918c/discord HTTP/1.1
 
+###
+# Create an ad
+POST http://localhost:3333/games/80848e26-164b-4e28-8d01-64028fe5f3d4/ads HTTP/1.1
+content-type: application/json
+
+{
+	"name": "player00",
+	"yearsPlaying": 4,
+	"discord": "letsplay",
+	"weekDays": [3,4,5],
+	"hourStart": "00:00",
+	"hourEnd": "06:00",
+	"useVoiceChannel": false
+}
