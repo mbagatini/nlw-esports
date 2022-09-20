@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 import logoImg from "../../assets/logo-nlw-esports.png";
 import { GameCard, GameCardProps } from "../../components/GameCard";
@@ -11,6 +12,7 @@ import { styles } from "./styles";
 
 export function Home() {
 	const [games, setGames] = useState<GameCardProps[]>([]);
+	const navigation = useNavigation();
 
 	useEffect(() => {
 		fetch("http://localhost:3333/games")
@@ -19,6 +21,12 @@ export function Home() {
 				setGames(data);
 			})
 	});
+
+	function handleOpenGame(game: GameCardProps) {
+		navigation.navigate("game", {
+			...game
+		});
+	}
 
 	return (
 		<Background>
@@ -31,7 +39,7 @@ export function Home() {
 					data={games}
 					keyExtractor={item => item.id}
 					renderItem={({ item }) => (
-						<GameCard data={item} />
+						<GameCard data={item} onPress={() => handleOpenGame(item)} />
 					)}
 					horizontal
 					showsHorizontalScrollIndicator={false}
