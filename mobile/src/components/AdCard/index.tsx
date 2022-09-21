@@ -14,9 +14,10 @@ export interface AdProps {
 	hourStart: string;
 	hourEnd: string;
 	useVoiceChannel: boolean;
+	handleOnConnect: () => void;
 }
 
-export function AdCard(props: AdProps) {
+export function AdCard({ handleOnConnect, ...props }: AdProps) {
 	const dias = Object.keys(props.weekDays).length;
 	const disponibilidade = `${dias} ${dias == 1 ? 'dia' : 'dias'} \u2022 ${props.hourStart} - ${props.hourEnd}`;
 
@@ -30,7 +31,7 @@ export function AdCard(props: AdProps) {
 				colorValue={props.useVoiceChannel ? THEME.COLORS.SUCCESS : THEME.COLORS.ALERT}
 			/>
 
-			<TouchableOpacity style={styles.button}>
+			<TouchableOpacity style={styles.button} onPress={handleOnConnect}>
 				<GameController size={20} color={THEME.COLORS.TEXT} />
 				<Text style={styles.buttonTitle}>Conectar</Text>
 			</TouchableOpacity>
