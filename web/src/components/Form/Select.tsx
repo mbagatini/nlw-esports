@@ -25,7 +25,7 @@ export function Select({ data, ...props }: SelectProps) {
 				<SelectPrimitive.Content className="overflow-hidden bg-zinc-700 text-white text-sm rounded-lg right-2 top-4 w-full border border-zinc-600">
 					<SelectPrimitive.Viewport className="p-2 relative">
 						{data.map(item => (
-							<SelectPrimitive.Item value={item.key} className="flex items-center h-8 px-6">
+							<SelectPrimitive.Item key={item.key} value={item.key} className="flex items-center h-8 px-6">
 								<SelectPrimitive.ItemText>{item.value}</SelectPrimitive.ItemText>
 								<SelectPrimitive.ItemIndicator className="absolute left-0 w-6 px-2">
 									<Check className="w-4 h-4 text-emerald-400" />

@@ -19,6 +19,16 @@ interface CreateAdModalProps {
 
 export function CreateAdModal({ games }: CreateAdModalProps) {
 	const [weekDays, setWeekDays] = useState<string[]>([]);
+	const [useVoiceChannel, setUseVoiceChannel] = useState(false);
+
+	function handleCreateAd(event: React.FormEvent) {
+		event.preventDefault();
+
+		const formData = new FormData(event.target as HTMLFormElement);
+		const data = Object.fromEntries(formData);
+
+		console.log(data)
+	}
 
 	return (
 		<Dialog.Portal>
@@ -27,7 +37,7 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 			<Dialog.Content className='bg-[#2a2634] py-8 px-10 rounded-lg w-[480px] shadow-black/25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white fixed'>
 				<Dialog.Title className='text-3xl font-black'>Publique um anúncio</Dialog.Title>
 
-				<form action="" className='mt-8 flex flex-col gap-4'>
+				<form onSubmit={handleCreateAd} className='mt-8 flex flex-col gap-4'>
 					<div className='flex flex-col gap-2'>
 						<Label htmlFor="game">Qual o game?</Label>
 						<Select
@@ -38,17 +48,17 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 
 					<div className='flex flex-col gap-2'>
 						<Label htmlFor="name">Seu nome (ou nickname)</Label>
-						<Input type="text" id="name" placeholder='Como te chamam dentro do game?' />
+						<Input type="text" name="name" id="name" placeholder='Como te chamam dentro do game?' />
 					</div>
 
 					<div className='grid grid-cols-2 gap-6'>
 						<div className='flex flex-col gap-2'>
 							<Label htmlFor="yearsPlaying">Joga a quantos anos?</Label>
-							<Input type="number" id="yearsPlaying" placeholder='Tudo bem ser ZERO' />
+							<Input type="number" name="yearsPlaying" id="yearsPlaying" placeholder='Tudo bem ser ZERO' />
 						</div>
 						<div className='flex flex-col gap-2'>
 							<Label htmlFor="discord">Qual seu Discord?</Label>
-							<Input type="text" id="discord" placeholder='Usuario#0000' />
+							<Input type="text" name="discord" id="discord" placeholder='Usuario#0000' />
 						</div>
 					</div>
 
@@ -69,14 +79,18 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 						<div className='flex flex-col gap-2 flex-1'>
 							<Label htmlFor="hourStart">Qual horário do dia?</Label>
 							<div className='grid grid-cols-2 gap-2'>
-								<Input type="time" id="hourStart" placeholder='De' />
-								<Input type="time" id="hourEnd" placeholder='Até' />
+								<Input type="time" name="hourStart" id="hourStart" placeholder='De' />
+								<Input type="time" name="hourEnd" id="hourEnd" placeholder='Até' />
 							</div>
 						</div>
 					</div>
 
 					<label className='mt-2 flex gap-2 text-sm'>
-						<Checkbox.Root className="w-6 h-6 p-1 rounded bg-zinc-900">
+						<Checkbox.Root
+							checked={useVoiceChannel}
+							onCheckedChange={(checked) => { setUseVoiceChannel(checked === true) }}
+							className="w-6 h-6 p-1 rounded bg-zinc-900"
+						>
 							<Checkbox.Indicator>
 								<Check className="w-4 h-4 text-emerald-400" />
 							</Checkbox.Indicator>
