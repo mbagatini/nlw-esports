@@ -1,5 +1,7 @@
+import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Checkbox from "@radix-ui/react-checkbox";
+import * as Toggle from "@radix-ui/react-toggle-group";
 import { Check, GameController } from 'phosphor-react';
 
 import { Input } from "./Form/Input";
@@ -16,6 +18,8 @@ interface CreateAdModalProps {
 }
 
 export function CreateAdModal({ games }: CreateAdModalProps) {
+	const [weekDays, setWeekDays] = useState<string[]>([]);
+
 	return (
 		<Dialog.Portal>
 			<Dialog.Overlay className='bg-black/60 inset-0 fixed' />
@@ -52,15 +56,15 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 						<div className='flex flex-col gap-2'>
 							<Label htmlFor="weekDays">Quando costuma jogar?</Label>
 
-							<div className='grid grid-cols-4 gap-2'>
-								<button type="button" className='w-8 h-8 rounded bg-zinc-900'>D</button>
-								<button type="button" className='w-8 h-8 rounded bg-zinc-900'>S</button>
-								<button type="button" className='w-8 h-8 rounded bg-zinc-900'>T</button>
-								<button type="button" className='w-8 h-8 rounded bg-zinc-900'>Q</button>
-								<button type="button" className='w-8 h-8 rounded bg-zinc-900'>Q</button>
-								<button type="button" className='w-8 h-8 rounded bg-zinc-900'>S</button>
-								<button type="button" className='w-8 h-8 rounded bg-zinc-900'>S</button>
-							</div>
+							<Toggle.Root type='multiple' onValueChange={setWeekDays} className='grid grid-cols-4 gap-2'>
+								<Toggle.Item value="0" className={`w-8 h-8 rounded ${weekDays.includes('0') ? 'bg-violet-500' : 'bg-zinc-900'}`}>D</Toggle.Item>
+								<Toggle.Item value="1" className={`w-8 h-8 rounded ${weekDays.includes('1') ? 'bg-violet-500' : 'bg-zinc-900'}`}>S</Toggle.Item>
+								<Toggle.Item value="2" className={`w-8 h-8 rounded ${weekDays.includes('2') ? 'bg-violet-500' : 'bg-zinc-900'}`}>T</Toggle.Item>
+								<Toggle.Item value="3" className={`w-8 h-8 rounded ${weekDays.includes('3') ? 'bg-violet-500' : 'bg-zinc-900'}`}>Q</Toggle.Item>
+								<Toggle.Item value="4" className={`w-8 h-8 rounded ${weekDays.includes('4') ? 'bg-violet-500' : 'bg-zinc-900'}`}>Q</Toggle.Item>
+								<Toggle.Item value="5" className={`w-8 h-8 rounded ${weekDays.includes('5') ? 'bg-violet-500' : 'bg-zinc-900'}`}>S</Toggle.Item>
+								<Toggle.Item value="6" className={`w-8 h-8 rounded ${weekDays.includes('6') ? 'bg-violet-500' : 'bg-zinc-900'}`}>S</Toggle.Item>
+							</Toggle.Root>
 						</div>
 						<div className='flex flex-col gap-2 flex-1'>
 							<Label htmlFor="hourStart">Qual horário do dia?</Label>
