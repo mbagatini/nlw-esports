@@ -4,8 +4,18 @@ import { Check, GameController } from 'phosphor-react';
 
 import { Input } from "./Form/Input";
 import { Label } from "./Form/Label";
+import { Select } from "./Form/Select";
 
-export function CreateAdModal() {
+interface Games {
+	id: string;
+	title: string;
+}
+
+interface CreateAdModalProps {
+	games: Games[];
+}
+
+export function CreateAdModal({ games }: CreateAdModalProps) {
 	return (
 		<Dialog.Portal>
 			<Dialog.Overlay className='bg-black/60 inset-0 fixed' />
@@ -16,8 +26,12 @@ export function CreateAdModal() {
 				<form action="" className='mt-8 flex flex-col gap-4'>
 					<div className='flex flex-col gap-2'>
 						<Label htmlFor="game">Qual o game?</Label>
-						<Input type="text" id="game" placeholder='Selecione o game que deseja jogar' />
+						<Select
+							placeholder='Selecione o game que deseja jogar'
+							data={games.map(g => { return { key: g.id, value: g.title } })}
+						/>
 					</div>
+
 					<div className='flex flex-col gap-2'>
 						<Label htmlFor="name">Seu nome (ou nickname)</Label>
 						<Input type="text" id="name" placeholder='Como te chamam dentro do game?' />

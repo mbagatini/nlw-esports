@@ -3,11 +3,11 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 import { GameBanner } from './components/GameBanner';
 import { CreateAdBanner } from './components/CreateAdBanner';
+import { CreateAdModal } from './components/CreateAdModal';
 
 import './styles/main.css';
 
 import logoImg from './assets/logo.svg';
-import { CreateAdModal } from './components/CreateAdModal';
 
 interface Game {
 	id: string;
@@ -50,7 +50,7 @@ function App() {
 
 			<Dialog.Root>
 				<CreateAdBanner />
-				<CreateAdModal />
+				<CreateAdModal games={games} />
 			</Dialog.Root >
 		</div >
 	)
