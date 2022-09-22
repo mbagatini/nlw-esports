@@ -8,6 +8,7 @@ import { CreateAdModal } from './components/CreateAdModal';
 import './styles/main.css';
 
 import logoImg from './assets/logo.svg';
+import { api } from './api/api';
 
 interface Game {
 	id: string;
@@ -22,12 +23,11 @@ function App() {
 	const [games, setGames] = useState<Game[]>([]);
 
 	useEffect(() => {
-		fetch('http://localhost:3333/games')
-			.then((response) => response.json())
-			.then((games) => {
-				setGames(games);
+		api.get('/games')
+			.then((response) => {
+				setGames(response.data);
 			});
-	})
+	}, [])
 
 	return (
 		<div className="max-w-[1344px] mx-auto my-20 flex flex-col items-center">
