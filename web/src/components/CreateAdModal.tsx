@@ -7,6 +7,7 @@ import { Check, GameController } from 'phosphor-react';
 import { Input } from "./Form/Input";
 import { Label } from "./Form/Label";
 import { Select } from "./Form/Select";
+import { api } from "../api/api";
 
 interface Games {
 	id: string;
@@ -21,13 +22,29 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 	const [weekDays, setWeekDays] = useState<string[]>([]);
 	const [useVoiceChannel, setUseVoiceChannel] = useState(false);
 
-	function handleCreateAd(event: React.FormEvent) {
+	async function handleCreateAd(event: React.FormEvent) {
 		event.preventDefault();
 
 		const formData = new FormData(event.target as HTMLFormElement);
 		const data = Object.fromEntries(formData);
 
-		console.log(data)
+		// Validação dos dados
+
+		try {
+			await api.post(`/games/${data.gameId}/ads`, {
+				name: data.name,
+				yearsPlaying: Number(data.yearsPlaying),
+				discord: data.discord,
+				weekDays: weekDays.map(Number),
+				hourStart: data.hourStart,
+				hourEnd: data.hourEnd,
+				useVoiceChannel: useVoiceChannel
+			});
+
+			alert("Anúncio criado com sucesso");
+		} catch (error) {
+			alert("Erro ao criar o anúncio");
+		}
 	}
 
 	return (
@@ -41,6 +58,7 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 					<div className='flex flex-col gap-2'>
 						<Label htmlFor="game">Qual o game?</Label>
 						<Select
+							name="gameId"
 							placeholder='Selecione o game que deseja jogar'
 							data={games.map(g => { return { key: g.id, value: g.title } })}
 						/>
