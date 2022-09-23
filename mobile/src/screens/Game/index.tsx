@@ -59,7 +59,7 @@ export function Game() {
 				<FlatList
 					data={ads}
 					horizontal
-					style={styles.contentList}
+					style={styles.containerList}
 					contentContainerStyle={ads.length == 0 ? styles.emptyListContent : styles.contentList}
 					showsHorizontalScrollIndicator={false}
 					keyExtractor={item => item.id}
@@ -67,7 +67,7 @@ export function Game() {
 						<AdCard key={item.id} {...item} handleOnConnect={() => { }} />
 					)}
 					ListEmptyComponent={() => (
-						<Text style={styles.emptyList}>Nenhum anúncio fio publicado ainda.</Text>
+						<Text style={styles.emptyList}>Nenhum anúncio foi publicado ainda.</Text>
 					)}
 				/>
 			</SafeAreaView>
