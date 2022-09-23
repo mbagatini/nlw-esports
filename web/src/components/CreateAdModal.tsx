@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Checkbox from "@radix-ui/react-checkbox";
+import * as ToastPrimitive from '@radix-ui/react-toast';
 import * as Toggle from "@radix-ui/react-toggle-group";
 import { Check, GameController } from 'phosphor-react';
 
@@ -8,6 +9,7 @@ import { Input } from "./Form/Input";
 import { Label } from "./Form/Label";
 import { Select } from "./Form/Select";
 import { api } from "../api/api";
+import { Toast } from "./Toast";
 
 interface Games {
 	id: string;
@@ -21,6 +23,8 @@ interface CreateAdModalProps {
 export function CreateAdModal({ games }: CreateAdModalProps) {
 	const [weekDays, setWeekDays] = useState<string[]>([]);
 	const [useVoiceChannel, setUseVoiceChannel] = useState(false);
+
+	const [alert, setAlert] = useState<ToasData>({ title: "", message: "", isOpen: false });
 
 	async function handleCreateAd(event: React.FormEvent) {
 		event.preventDefault();
@@ -48,6 +52,7 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 	}
 
 	return (
+		<>
 		<Dialog.Portal>
 			<Dialog.Overlay className='bg-black/60 inset-0 fixed' />
 
@@ -126,5 +131,17 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 				</form>
 			</Dialog.Content>
 		</Dialog.Portal>
+
+
+			<ToastPrimitive.Provider swipeDirection="right">
+				<Toast
+					title={alert.title}
+					message={alert.message}
+					open={alert.isOpen}
+					onOpenChange={() => setAlert({ ...alert, isOpen: !alert.isOpen })}
+				/>
+				<ToastPrimitive.Viewport className='fixed z-50 bottom-0 right-0 w-[390px] p-6 flex flex-col gap-2' />
+			</ToastPrimitive.Provider>
+		</>
 	)
 }
