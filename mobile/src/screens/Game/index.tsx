@@ -9,6 +9,7 @@ import { Background } from "../../components/Background";
 import { Heading } from "../../components/Heading";
 import { AdCard, AdProps } from "../../components/AdCard";
 
+import { api } from "../../api/api";
 import { styles } from "./styles";
 import { THEME } from "../../theme";
 
@@ -28,10 +29,9 @@ export function Game() {
 	const navigation = useNavigation();
 
 	useEffect(() => {
-		fetch(`http://localhost:3333/games/${game.id}/ads`)
-			.then((response) => response.json())
-			.then((data) => {
-				setAds(data);
+		api.get(`/games/${game.id}/ads`)
+			.then((response) => {
+				setAds(response.data);
 			})
 	});
 

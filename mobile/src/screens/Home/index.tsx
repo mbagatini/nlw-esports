@@ -6,8 +6,9 @@ import { useNavigation } from "@react-navigation/native";
 import logoImg from "../../assets/logo-nlw-esports.png";
 import { GameCard, GameCardProps } from "../../components/GameCard";
 import { Heading } from "../../components/Heading";
-
 import { Background } from "../../components/Background";
+
+import { api } from "../../api/api";
 import { styles } from "./styles";
 
 export function Home() {
@@ -15,10 +16,9 @@ export function Home() {
 	const navigation = useNavigation();
 
 	useEffect(() => {
-		fetch("http://localhost:3333/games")
-			.then((response) => response.json())
-			.then((data) => {
-				setGames(data);
+		api.get("/games")
+			.then((response) => {
+				setGames(response.data);
 			})
 	});
 
