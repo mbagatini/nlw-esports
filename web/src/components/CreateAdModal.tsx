@@ -114,7 +114,7 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 							</div>
 						</div>
 
-						<label className='mt-2 flex gap-2 text-sm'>
+						<Label>
 							<Checkbox.Root
 								checked={useVoiceChannel}
 								onCheckedChange={(checked) => { setUseVoiceChannel(checked === true) }}
@@ -125,7 +125,7 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 								</Checkbox.Indicator>
 							</Checkbox.Root>
 							Costumo me conenctar ao chat de voz
-						</label>
+						</Label>
 
 						<footer className='mt-4 flex justify-end gap-4'>
 							<Dialog.Close className='bg-zinc-500 hover:bg-zinc-600 px-5 h-12 rounded-md font-semibold'>Cancelar</Dialog.Close>
