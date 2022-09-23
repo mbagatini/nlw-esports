@@ -14,7 +14,7 @@ interface SelectProps extends SelectPrimitive.SelectProps {
 export function Select({ data, placeholder, ...props }: SelectProps) {
 	return (
 		<SelectPrimitive.Root {...props}>
-			<SelectPrimitive.Trigger className='flex justify-between items-center bg-zinc-900 px-4 py-3 rounded text-sm text-white'>
+			<SelectPrimitive.Trigger className='flex justify-between items-center bg-zinc-900 px-4 py-3 rounded text-sm text-white [&[data-placeholder]]:text-zinc-500'>
 				<SelectPrimitive.Value placeholder={placeholder} />
 				<SelectPrimitive.Icon className="text-zinc-400">
 					<CaretDown size={15} />
