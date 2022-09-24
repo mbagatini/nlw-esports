@@ -20,7 +20,6 @@ interface RouteParams {
 	banner: string;
 }
 
-
 export function Game() {
 	const [ads, setAds] = useState<AdProps[]>([]);
 	const [discordDuoSelected, setDiscordDuoSelected] = useState("");
@@ -37,9 +36,14 @@ export function Game() {
 			})
 	});
 
-
 	function handleGoBack() {
 		navigation.goBack();
+	}
+
+	async function getDiscordUser(adsId: string) {
+		const response = await api.get<{ discord: string }>(`/ads/${adsId}/discord`);
+
+		setDiscordDuoSelected(response.data.discord);
 	}
 
 	return (
@@ -66,7 +70,7 @@ export function Game() {
 					showsHorizontalScrollIndicator={false}
 					keyExtractor={item => item.id}
 					renderItem={({ item }) => (
-						<AdCard key={item.id} {...item} handleOnConnect={() => { }} />
+						<AdCard key={item.id} {...item} handleOnConnect={() => getDiscordUser(item.id)} />
 					)}
 					ListEmptyComponent={() => (
 						<Text style={styles.emptyList}>Nenhum anúncio foi publicado ainda.</Text>
@@ -74,7 +78,7 @@ export function Game() {
 				/>
 
 				<DuoMatch
-					discord="morgana#2121"
+					discord={discordDuoSelected}
 					visible={discordDuoSelected.length > 0}
 					onClose={() => setDiscordDuoSelected("")}
 				/>
