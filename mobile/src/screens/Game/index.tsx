@@ -8,6 +8,7 @@ import logoImg from "../../assets/logo-nlw-esports.png";
 import { Background } from "../../components/Background";
 import { Heading } from "../../components/Heading";
 import { AdCard, AdProps } from "../../components/AdCard";
+import { DuoMatch } from "../../components/DuoMatch";
 
 import { api } from "../../api/api";
 import { styles } from "./styles";
@@ -22,6 +23,7 @@ interface RouteParams {
 
 export function Game() {
 	const [ads, setAds] = useState<AdProps[]>([]);
+	const [discordDuoSelected, setDiscordDuoSelected] = useState("");
 
 	const route = useRoute();
 	const game = route.params as RouteParams;
@@ -69,6 +71,12 @@ export function Game() {
 					ListEmptyComponent={() => (
 						<Text style={styles.emptyList}>Nenhum anúncio foi publicado ainda.</Text>
 					)}
+				/>
+
+				<DuoMatch
+					discord="morgana#2121"
+					visible={discordDuoSelected.length > 0}
+					onClose={() => setDiscordDuoSelected("")}
 				/>
 			</SafeAreaView>
 		</Background>
