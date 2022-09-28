@@ -1,5 +1,6 @@
-import { Ad } from "../dto/Ad";
+import { Ad, AdDiscord } from "../dto/Ad";
 
 export interface IAdsRepository {
-	list(): Promise<Ad[]>
+	list(): Promise<Ad[]>;
+	getDiscordByAdId(id: string): Promise<AdDiscord>;
 }
