@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ZodError } from "zod";
 import { CreateAdUseCase } from "./CreateAdUseCase";
 
 export class CreateAdController {
@@ -15,7 +16,11 @@ export class CreateAdController {
 
 			return res.status(201).json(ad);
 		} catch (error) {
-			return res.status(400).json({ error: (error as Error).message });
+			if (error instanceof ZodError) {
+				return res.status(400).json(error.flatten().fieldErrors);
+			}
+
+			return res.status(400).json(error);
 		}
 	}
 }
