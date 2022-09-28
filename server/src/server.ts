@@ -1,14 +1,13 @@
-import express, { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
-import { convertHourStringToMinutes, convertMinutesToHoursString, getDaysOfWeekFromIndexArray } from './utils/dateFunctions';
+import express from 'express';
+import { router } from './routes';
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-const prisma = new PrismaClient();
+app.use(router);
 
 app.get("/games", async (req: Request, res: Response) => {
 	const response = await prisma.game.findMany({
