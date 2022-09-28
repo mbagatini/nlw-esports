@@ -13,3 +13,14 @@ export type AdByGame = Pick<PrismaAd,
 	"hourEnd" |
 	"useVoiceChannel"
 >;
+
+export type AdCreationParams = {
+	gameId: string;
+	name: string;
+	discord: string;
+	yearsPlaying: number;
+	hourStart: string;
+	hourEnd: string;
+	weekDays: number[];
+	useVoiceChannel: boolean;
+}

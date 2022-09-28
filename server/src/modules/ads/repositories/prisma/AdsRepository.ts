@@ -1,8 +1,28 @@
 import { prisma } from "../../../../database/prisma";
-import { Ad, AdByGame, AdDiscord } from "../../dto/Ad";
+import { convertHourStringToMinutes, getDaysOfWeekFromIndexArray } from "../../../../utils/dateFunctions";
+import { Ad, AdByGame, AdCreationParams, AdDiscord } from "../../dto/Ad";
 import { IAdsRepository } from "../IAdsRepository";
 
 export class AdsRepository implements IAdsRepository {
+	async create(data: AdCreationParams): Promise<Ad> {
+		var userDays = getDaysOfWeekFromIndexArray(data.weekDays.map(Number));
+
+		const ad = await prisma.ad.create({
+			data: {
+				gameId: data.gameId,
+				name: data.name,
+				yearsPlaying: data.yearsPlaying,
+				discord: data.discord,
+				weekDays: userDays,
+				hourStart: convertHourStringToMinutes(data.hourStart),
+				hourEnd: convertHourStringToMinutes(data.hourEnd),
+				useVoiceChannel: data.useVoiceChannel,
+			}
+		});
+
+		return ad;
+	}
+
 	async list(): Promise<Ad[]> {
 		const ads = await prisma.ad.findMany();
 		return ads;
