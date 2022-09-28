@@ -11,7 +11,7 @@ export class ListAdsController {
 	async handle(req: Request, res: Response) {
 		try {
 			const ads = await this.useCase.execute();
-			return res.send(ads);
+			return res.json(ads);
 		} catch (error) {
 			return res.status(400).json({ error: (error as Error).message });
 		}
