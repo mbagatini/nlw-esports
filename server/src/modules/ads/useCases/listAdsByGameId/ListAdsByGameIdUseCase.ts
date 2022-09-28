@@ -1,18 +1,18 @@
 import { convertMinutesToHoursString } from "../../../../utils/dateFunctions";
-import { Ad } from "../../dto/Ad";
+import { AdByGame } from "../../dto/Ad";
 import { IAdsRepository } from "../../repositories/IAdsRepository";
 
-type AdList = Omit<Ad, "hourStart" | "hourEnd"> | { hourStart: string, hourEnd: string };
+type AdListByGame = Omit<AdByGame, "hourStart" | "hourEnd"> | { hourStart: string, hourEnd: string };
 
-export class ListAdsUseCase {
+export class ListAdsByGameIdUseCase {
 	private adsRepository: IAdsRepository;
 
 	constructor(adsRepository: IAdsRepository) {
 		this.adsRepository = adsRepository;
 	}
 
-	async execute(): Promise<AdList[]> {
-		const ads = await this.adsRepository.list();
+	async execute(gameId: string): Promise<AdListByGame[]> {
+		const ads = await this.adsRepository.listAdsByGameId(gameId);
 
 		const formattedAds = ads.map(ad => {
 			return {
