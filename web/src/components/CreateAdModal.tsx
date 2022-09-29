@@ -1,15 +1,14 @@
-import { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
 import * as Checkbox from "@radix-ui/react-checkbox";
-import * as ToastPrimitive from '@radix-ui/react-toast';
+import * as Dialog from "@radix-ui/react-dialog";
 import * as Toggle from "@radix-ui/react-toggle-group";
 import { Check, GameController } from 'phosphor-react';
+import { useState } from "react";
 
+import { api } from "../api/api";
+import { useToast } from "../hooks/useToast";
 import { Input } from "./Form/Input";
 import { Label } from "./Form/Label";
 import { Select } from "./Form/Select";
-import { api } from "../api/api";
-import { Toast, ToastProps } from "./Toast";
 
 interface Games {
 	id: string;
@@ -20,17 +19,10 @@ interface CreateAdModalProps {
 	games: Games[];
 }
 
-interface ToasData extends ToastProps {
-	isOpen: boolean;
-}
-
 export function CreateAdModal({ games }: CreateAdModalProps) {
 	const [weekDays, setWeekDays] = useState<string[]>([]);
 	const [useVoiceChannel, setUseVoiceChannel] = useState(false);
-
-	const [alert, setAlert] = useState<ToasData>({ isOpen: false } as ToasData);
-
-	console.log(alert)
+	const { addToast } = useToast();
 
 	async function handleCreateAd(event: React.FormEvent) {
 		event.preventDefault();
@@ -50,10 +42,9 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 				hourEnd: data.hourEnd,
 				useVoiceChannel: useVoiceChannel
 			});
-
-			setAlert({ toastType: 'message', title: "Publicado!", message: "Anúncio publicado com sucesso", isOpen: true });
+			addToast({ toastType: 'message', title: "Publicado!", message: "Anúncio publicado com sucesso" });
 		} catch (error) {
-			setAlert({ toastType: 'error', title: "Erro", message: "Erro ao publicar o anúncio", isOpen: true });
+			addToast({ toastType: 'error', title: "Ocorreu um problema", message: "Erro ao publicar o anúncio" });
 		}
 	}
 
@@ -137,18 +128,6 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 					</form>
 				</Dialog.Content>
 			</Dialog.Portal>
-
-
-			<ToastPrimitive.Provider swipeDirection="right">
-				<Toast
-					title={alert.title}
-					message={alert.message}
-					toastType={alert.toastType}
-					open={alert.isOpen}
-					onOpenChange={() => setAlert({ ...alert, isOpen: !alert.isOpen })}
-				/>
-				<ToastPrimitive.Viewport className='fixed z-50 bottom-0 right-0 w-[390px] p-6 flex flex-col gap-2' />
-			</ToastPrimitive.Provider>
 		</>
 	)
 }
