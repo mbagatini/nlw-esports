@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
+import { useKeenSlider } from 'keen-slider/react';
+import { useEffect, useState } from 'react';
 
 import { api } from '../api/api';
-import { GameBanner } from '../components/GameBanner';
 import { CreateAdBanner } from '../components/CreateAdBanner';
 import { CreateAdModal } from '../components/CreateAdModal';
+import { GameBanner } from '../components/GameBanner';
 
 import '../styles/main.css';
+import 'keen-slider/keen-slider.min.css';
 
 import logoImg from '../assets/logo.svg';
 
@@ -21,6 +23,23 @@ interface Game {
 
 export function Home() {
 	const [games, setGames] = useState<Game[]>([]);
+
+	const [sliderRef] = useKeenSlider(
+		{
+			slides: {
+				perView: 6,
+				spacing: 24
+			},
+			breakpoints: {
+				'(max-width: 768px)': {
+					slides: {
+						perView: 3,
+						spacing: 24
+					},
+				},
+			},
+		}
+	)
 
 	useEffect(() => {
 		api.get('/games')
@@ -37,9 +56,10 @@ export function Home() {
 				Seu <span className='bg-nlw-gradient bg-clip-text text-transparent'>duo</span> está aqui.
 			</h1>
 
-			<div className="grid grid-cols-6 gap-6 mt-16">
-				{games.map((game) => (
+			<div className="keen-slider mt-16" ref={sliderRef}>
+				{games.map((game, idx) => (
 					<GameBanner
+						className={`keen-slider__slide number-slide${idx}`}
 						key={game.id}
 						bannerUrl={game.banner}
 						title={game.title}
