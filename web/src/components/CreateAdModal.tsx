@@ -3,6 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import * as Toggle from "@radix-ui/react-toggle-group";
 import { Check, GameController } from 'phosphor-react';
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 import { api } from "../api/api";
 import { useToast } from "../hooks/useToast";
@@ -20,12 +21,10 @@ interface CreateAdModalProps {
 }
 
 export function CreateAdModal({ games }: CreateAdModalProps) {
-	const [weekDays, setWeekDays] = useState<string[]>([]);
 	const [useVoiceChannel, setUseVoiceChannel] = useState(false);
 	const { addToast } = useToast();
 
-	async function handleCreateAd(event: React.FormEvent) {
-		event.preventDefault();
+	const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormInputs>();
 
 		const formData = new FormData(event.target as HTMLFormElement);
 		const data = Object.fromEntries(formData);
@@ -49,14 +48,13 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 	}
 
 	return (
-		<>
 			<Dialog.Portal>
 				<Dialog.Overlay className='bg-black/60 inset-0 fixed' />
 
-				<Dialog.Content className='bg-[#2a2634] py-8 px-10 rounded-lg w-[480px] shadow-black/25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white fixed'>
+			<Dialog.Content className='bg-[#2a2634] py-8 px-10 rounded-lg w-[500px] shadow-black/25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white fixed'>
 					<Dialog.Title className='text-3xl font-black'>Publique um anúncio</Dialog.Title>
 
-					<form onSubmit={handleCreateAd} className='mt-8 flex flex-col gap-4'>
+				<form onSubmit={handleSubmit(handleCreateAd)} className='mt-8 flex flex-col gap-4'>
 						<div className='flex flex-col gap-2'>
 							<Label htmlFor="game">Qual o game?</Label>
 							<Select
@@ -67,18 +65,15 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 						</div>
 
 						<div className='flex flex-col gap-2'>
-							<Label htmlFor="name">Seu nome (ou nickname)</Label>
-							<Input type="text" name="name" id="name" placeholder='Como te chamam dentro do game?' />
+						<Input type="text" id="name" label="Seu nome (ou nickname)" placeholder='Como te chamam dentro do game?' {...register("name")} />
 						</div>
 
 						<div className='grid grid-cols-2 gap-6'>
 							<div className='flex flex-col gap-2'>
-								<Label htmlFor="yearsPlaying">Joga a quantos anos?</Label>
-								<Input type="number" name="yearsPlaying" id="yearsPlaying" placeholder='Tudo bem ser ZERO' />
+							<Input type="number" id="yearsPlaying" label="Joga a quantos anos?" placeholder='Tudo bem ser ZERO' {...register("yearsPlaying")} />
 							</div>
 							<div className='flex flex-col gap-2'>
-								<Label htmlFor="discord">Qual seu Discord?</Label>
-								<Input type="text" name="discord" id="discord" placeholder='Usuario#0000' />
+							<Input type="text" id="discord" label="Qual seu Discord?" placeholder='Usuario#0000' {...register("discord")} />
 							</div>
 						</div>
 
@@ -99,8 +94,8 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 							<div className='flex flex-col gap-2 flex-1'>
 								<Label htmlFor="hourStart">Qual horário do dia?</Label>
 								<div className='grid grid-cols-2 gap-2'>
-									<Input type="time" name="hourStart" id="hourStart" placeholder='De' />
-									<Input type="time" name="hourEnd" id="hourEnd" placeholder='Até' />
+								<Input type="time" id="hourStart" placeholder='De' {...register("hourStart")} />
+								<Input type="time" id="hourEnd" placeholder='Até' {...register("hourEnd")} />
 								</div>
 							</div>
 						</div>
@@ -128,6 +123,5 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 					</form>
 				</Dialog.Content>
 			</Dialog.Portal>
-		</>
 	)
 }
