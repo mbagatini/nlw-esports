@@ -56,11 +56,12 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 
 				<form onSubmit={handleSubmit(handleCreateAd)} className='mt-8 flex flex-col gap-4'>
 						<div className='flex flex-col gap-2'>
-							<Label htmlFor="game">Qual o game?</Label>
 							<Select
-								name="gameId"
+							label="Qual o game?"
 								placeholder='Selecione o game que deseja jogar'
 								data={games.map(g => { return { key: g.id, value: g.title } })}
+							{...register("gameId")}
+							onValueChange={value => setValue("gameId", value)}
 							/>
 						</div>
 
