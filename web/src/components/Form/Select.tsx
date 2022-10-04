@@ -1,6 +1,7 @@
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { CaretDown, Check } from 'phosphor-react';
 import { forwardRef } from 'react';
+import { FieldError } from 'react-hook-form';
 import { Label } from './Label';
 
 interface Values {
@@ -11,10 +12,11 @@ interface Values {
 interface SelectProps extends SelectPrimitive.SelectProps {
 	label?: string;
 	placeholder: string;
-	data: Values[]
+	data: Values[];
+	error?: FieldError;
 }
 
-export const Select = forwardRef<HTMLDivElement, SelectProps>(({ label, data, placeholder, ...props }, forwardedRef) => {
+export const Select = forwardRef<HTMLDivElement, SelectProps>(({ label, data, placeholder, error, ...props }, forwardedRef) => {
 	return (
 		<>
 			{label ?? (
@@ -22,7 +24,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({ label, data, pl
 			)}
 
 			<SelectPrimitive.Root {...props}>
-				<SelectPrimitive.Trigger className='flex justify-between items-center bg-zinc-900 px-4 py-3 rounded text-sm text-white [&[data-placeholder]]:text-zinc-500'>
+				<SelectPrimitive.Trigger className={`flex justify-between items-center bg-zinc-900 px-4 py-3 rounded text-sm text-white [&[data-placeholder]]:text-zinc-500 ${error ? "border border-rose-600" : ""}`}>
 					<SelectPrimitive.Value placeholder={placeholder} />
 					<SelectPrimitive.Icon className="text-zinc-400">
 						<CaretDown size={15} />
@@ -47,6 +49,8 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({ label, data, pl
 					</SelectPrimitive.Content>
 				</SelectPrimitive.Portal>
 			</SelectPrimitive.Root>
+
+			{error && <span className="text-xs text-rose-600">{error.message}</span>}
 		</>
 	)
 })
