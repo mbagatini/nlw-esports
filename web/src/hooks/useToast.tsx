@@ -17,7 +17,6 @@ export function ToastProvider({ children }: ToastProviderProps) {
 
 	function addToast(toast: ToastProps) {
 		setToasts(toasts => [...toasts, toast]);
-		console.log(toasts);
 	}
 
 	// Removes 1st toast from the list afeter 5 secons (default duration of Radix Toast)
