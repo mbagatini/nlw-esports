@@ -24,7 +24,7 @@ interface Game {
 export function Home() {
 	const [games, setGames] = useState<Game[]>([]);
 
-	const [sliderRef] = useKeenSlider(
+	const [sliderRef, slider] = useKeenSlider(
 		{
 			slides: {
 				perView: 6,
@@ -45,6 +45,9 @@ export function Home() {
 		api.get('/games')
 			.then((response) => {
 				setGames(response.data);
+
+				// As the images were not ready, keen-slider needs to refresh the carousel
+				slider.current?.update();
 			});
 	}, [])
 
