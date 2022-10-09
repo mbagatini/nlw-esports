@@ -9,7 +9,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, ...props }, ref) => {
 	return (
-		<div className="flex flex-col gap-2">
+		<div className="flex flex-col gap-2 justify-between">
 			{label && (
 				<Label htmlFor={props.name}>{label}</Label>
 			)}
@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, .
 			<input
 				{...props}
 				ref={ref}
-				className={`bg-zinc-900 px-4 py-3 rounded text-sm placeholder:text-zinc-500 ${error ? "border border-rose-600" : ""}`}
+				className={`bg-zinc-900 px-4 py-3 rounded text-xs md:text-sm placeholder:text-zinc-500 ${error ? "border border-rose-600" : ""}`}
 			/>
 
 			{error && <span className="text-xs text-rose-600">{error.message}</span>}

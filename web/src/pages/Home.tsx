@@ -27,14 +27,20 @@ export function Home() {
 	const [sliderRef, slider] = useKeenSlider(
 		{
 			slides: {
-				perView: 6,
-				spacing: 24
+				perView: 2,
+				spacing: 16
 			},
 			breakpoints: {
-				'(max-width: 768px)': {
+				'(min-width: 768px)': {
 					slides: {
 						perView: 3,
-						spacing: 24
+						spacing: 16
+					},
+				},
+				'(min-width: 1024px)': {
+					slides: {
+						perView: 6,
+						spacing: 16
 					},
 				},
 			},
@@ -52,10 +58,10 @@ export function Home() {
 	}, [])
 
 	return (
-		<div className="max-w-[1344px] mx-auto my-20 flex flex-col items-center">
+		<div className="max-w-xs md:max-w-xl lg:max-w-4xl xl:max-w-[1344px] mx-auto my-20 flex flex-col items-center">
 			<img src={logoImg} alt="Logo NLW eSports" />
 
-			<h1 className="text-6xl text-white font-black mt-20">
+			<h1 className="text-3xl md:text-5xl lg:text-6xl text-white font-black mt-20">
 				Seu <span className='bg-nlw-gradient bg-clip-text text-transparent'>duo</span> está aqui.
 			</h1>
 

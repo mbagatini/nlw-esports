@@ -24,7 +24,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({ label, data, pl
 			)}
 
 			<SelectPrimitive.Root {...props}>
-				<SelectPrimitive.Trigger className={`flex justify-between items-center bg-zinc-900 px-4 py-3 rounded text-sm text-white [&[data-placeholder]]:text-zinc-500 ${error ? "border border-rose-600" : ""}`}>
+				<SelectPrimitive.Trigger className={`flex justify-between items-center text-start bg-zinc-900 px-4 py-3 rounded text-xs md:text-sm text-white [&[data-placeholder]]:text-zinc-500 ${error ? "border border-rose-600" : ""}`}>
 					<SelectPrimitive.Value placeholder={placeholder} />
 					<SelectPrimitive.Icon className="text-zinc-400">
 						<CaretDown size={15} />
@@ -32,7 +32,7 @@ export const Select = forwardRef<HTMLDivElement, SelectProps>(({ label, data, pl
 				</SelectPrimitive.Trigger>
 
 				<SelectPrimitive.Portal>
-					<SelectPrimitive.Content className="overflow-hidden bg-zinc-700 text-white text-sm rounded-lg right-2 top-4 w-full border border-zinc-600">
+					<SelectPrimitive.Content className="overflow-hidden bg-zinc-700 text-white text-xs md:text-sm rounded-lg right-2 top-4 w-full border border-zinc-600">
 						<SelectPrimitive.Viewport className="p-2 relative">
 							{data.map(item => (
 								<SelectPrimitive.Item ref={forwardedRef} key={item.key} value={item.key} className="flex items-center h-8 px-6">

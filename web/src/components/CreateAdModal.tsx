@@ -56,10 +56,10 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 
 	return (
 		<Dialog.Portal>
-			<Dialog.Overlay className='bg-black/60 inset-0 fixed' />
+			<Dialog.Overlay className='bg-black/60 inset-0 fixed overflow-y-auto' />
 
-			<Dialog.Content className='bg-[#2a2634] py-8 px-10 rounded-lg w-[500px] shadow-black/25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white fixed'>
-				<Dialog.Title className='text-3xl font-black'>Publique um anúncio</Dialog.Title>
+			<Dialog.Content className=' w-[520px] max-w-xs md:max-w-[520px] max-h-[600px] md:max-h-[800px] overflow-auto bg-[#2a2634] py-8 px-10 rounded-lg shadow-black/25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white fixed'>
+				<Dialog.Title className='text-xl md:text-2xl lg:text-3xl font-black'>Publique um anúncio</Dialog.Title>
 
 				<form onSubmit={handleSubmit(handleCreateAd)} className='mt-8 flex flex-col gap-4'>
 					<div className='flex flex-col gap-2'>
@@ -77,27 +77,27 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 						<Input type="text" id="name" label="Seu nome (ou nickname)" placeholder='Como te chamam dentro do game?' {...register("name", { required: "Campo obrigatório" })} error={errors.name} />
 					</div>
 
-					<div className='grid grid-cols-2 gap-6'>
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
 						<div className='flex flex-col gap-2'>
-							<Input type="number" id="yearsPlaying" label="Joga a quantos anos?" placeholder='Tudo bem ser ZERO' {...register("yearsPlaying", { required: "Campo obrigatório" })} error={errors.yearsPlaying} />
+							<Input type="tel" id="yearsPlaying" label="Joga a quantos anos?" placeholder='Tudo bem ser ZERO' {...register("yearsPlaying", { required: "Campo obrigatório" })} error={errors.yearsPlaying} />
 						</div>
 						<div className='flex flex-col gap-2'>
 							<Input type="text" id="discord" label="Qual seu Discord?" placeholder='Usuario#0000' {...register("discord", { required: "Campo obrigatório" })} error={errors.discord} />
 						</div>
 					</div>
 
-					<div className='flex gap-6'>
+					<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
 						<div className='flex flex-col gap-2'>
 							<Label htmlFor="weekDays">Quando costuma jogar?</Label>
 
-							<Toggle.Root type='multiple' {...register("weekDays", { required: "Campo obrigatório" })} onValueChange={value => setValue("weekDays", value)} className='grid grid-cols-4 gap-2'>
-								<Toggle.Item value="0" className='w-8 h-8 rounded [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>D</Toggle.Item>
-								<Toggle.Item value="1" className='w-8 h-8 rounded [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>S</Toggle.Item>
-								<Toggle.Item value="2" className='w-8 h-8 rounded [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>T</Toggle.Item>
-								<Toggle.Item value="3" className='w-8 h-8 rounded [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>Q</Toggle.Item>
-								<Toggle.Item value="4" className='w-8 h-8 rounded [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>Q</Toggle.Item>
-								<Toggle.Item value="5" className='w-8 h-8 rounded [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>S</Toggle.Item>
-								<Toggle.Item value="6" className='w-8 h-8 rounded [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>S</Toggle.Item>
+							<Toggle.Root type='multiple' {...register("weekDays", { required: "Campo obrigatório" })} onValueChange={value => setValue("weekDays", value)} className='grid grid-cols-7 md:grid-cols-4 gap-2'>
+								<Toggle.Item value="0" className='w-8 h-8 rounded text-xs md:text-sm [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>D</Toggle.Item>
+								<Toggle.Item value="1" className='w-8 h-8 rounded text-xs md:text-sm [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>S</Toggle.Item>
+								<Toggle.Item value="2" className='w-8 h-8 rounded text-xs md:text-sm [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>T</Toggle.Item>
+								<Toggle.Item value="3" className='w-8 h-8 rounded text-xs md:text-sm [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>Q</Toggle.Item>
+								<Toggle.Item value="4" className='w-8 h-8 rounded text-xs md:text-sm [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>Q</Toggle.Item>
+								<Toggle.Item value="5" className='w-8 h-8 rounded text-xs md:text-sm [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>S</Toggle.Item>
+								<Toggle.Item value="6" className='w-8 h-8 rounded text-xs md:text-sm [&[data-state="on"]]:bg-violet-500 bg-zinc-900'>S</Toggle.Item>
 							</Toggle.Root>
 
 							{errors.weekDays && <span className="text-xs text-rose-600">{errors.weekDays.message}</span>}
@@ -124,9 +124,9 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 						Costumo me conectar ao chat de voz
 					</Label>
 
-					<footer className='mt-4 flex justify-end gap-4'>
-						<Dialog.Close className='bg-zinc-500 hover:bg-zinc-600 px-5 h-12 rounded-md font-semibold'>Cancelar</Dialog.Close>
-						<button type="submit" className='flex items-center gap-3 bg-violet-500 hover:bg-violet-600 px-5 h-12 rounded-md font-semibold'>
+					<footer className='mt-4 flex justify-center md:justify-end gap-4'>
+						<Dialog.Close className='bg-zinc-500 hover:bg-zinc-600 px-5 h-12 rounded-md font-semibold text-sm md:text-base'>Cancelar</Dialog.Close>
+						<button type="submit" className='flex items-center gap-3 bg-violet-500 hover:bg-violet-600 px-5 h-12 rounded-md font-semibold text-sm md:text-base'>
 							<GameController size={24} />
 							Encontrar duo
 						</button>
