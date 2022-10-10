@@ -33,6 +33,38 @@ This is an entirely complete application, which includes the development of the 
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
   <img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" />
  </p>
+ 
+ ### How to run it?
+
+Clone the repository to your machine.
+
+Enter on server folder:
+```bash
+$ cd server
+```
+
+Install the dependencies:
+
+```bash
+$ npm install
+```
+
+We need to save the records in the database, so in order to do it correctly, check the .env file wich contains the URL for the database connection. 
+
+```env
+$ DATABASE_URL="mysql://my_connection"
+```
+
+Change it to the database you want to connect. After that, it's time to run the migration:
+
+```bash
+$ npx prisma migrate dev
+```
+
+If the configuration is ready and connected to the database, let's start the application:
+```bash
+$ npm run dev
+```
 
 # Front-end
 
@@ -44,6 +76,26 @@ This is an entirely complete application, which includes the development of the 
   <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
  </p>
+ 
+ ### How to run it?
+
+Clone the repository to your machine.
+
+Enter on web folder:
+```bash
+$ cd web
+```
+
+Install the dependencies:
+
+```bash
+$ npm install
+```
+
+Let's start the application:
+```bash
+$ npm run dev
+```
 
 # Mobile
 
@@ -54,6 +106,29 @@ This is an entirely complete application, which includes the development of the 
   <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
   <img src="https://img.shields.io/badge/Expo-1B1F23?style=for-the-badge&logo=expo&logoColor=white" />
  </p>
+
+
+### How to run it?
+
+Clone the repository to your machine.
+
+Enter on mobile folder:
+```bash
+$ cd mobile
+```
+
+Install the dependencies:
+
+```bash
+$ npm install
+```
+
+Let's start the application:
+```bash
+$ expo start
+```
+
+You can run the application directly on your phone, using the Expo Go app, or use an emulator.
 
 
 # 🔖 Application layout
