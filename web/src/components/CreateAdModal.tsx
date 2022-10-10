@@ -17,6 +17,7 @@ interface Games {
 
 interface CreateAdModalProps {
 	games: Games[];
+	setOpen(value: boolean): void;
 }
 
 type FormInputs = {
@@ -30,10 +31,10 @@ type FormInputs = {
 	useVoiceChannel: boolean;
 };
 
-export function CreateAdModal({ games }: CreateAdModalProps) {
+export function CreateAdModal({ games, setOpen }: CreateAdModalProps) {
 	const { addToast } = useToast();
 
-	const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormInputs>();
+	const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm<FormInputs>();
 
 	async function handleCreateAd(data: FormInputs) {
 		const adData = {
@@ -49,6 +50,11 @@ export function CreateAdModal({ games }: CreateAdModalProps) {
 		try {
 			await api.post(`/games/${data.gameId}/ads`, adData);
 			addToast({ toastType: 'message', title: "Publicado!", message: "Anúncio publicado com sucesso" });
+
+			setTimeout(() => {
+				setOpen(false)
+				reset();
+			}, 1500);
 		} catch (error) {
 			addToast({ toastType: 'error', title: "Ocorreu um problema", message: "Erro ao publicar o anúncio" });
 		}

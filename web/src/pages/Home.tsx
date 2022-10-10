@@ -23,6 +23,7 @@ interface Game {
 
 export function Home() {
 	const [games, setGames] = useState<Game[]>([]);
+	const [open, setOpen] = useState(false);
 
 	const [sliderRef, slider] = useKeenSlider(
 		{
@@ -77,9 +78,9 @@ export function Home() {
 				))}
 			</div>
 
-			<Dialog.Root>
+			<Dialog.Root open={open} onOpenChange={setOpen}>
 				<CreateAdBanner />
-				<CreateAdModal games={games} />
+				<CreateAdModal games={games} setOpen={setOpen} />
 			</Dialog.Root >
 		</div >
 	)
