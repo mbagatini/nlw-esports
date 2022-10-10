@@ -1,13 +1,14 @@
 import { belongsTo, createServer, hasMany, Model } from "miragejs";
+import { v4 as uuid } from 'uuid';
 
 export function createFakeAPI() {
 	createServer({
 		models: {
 			game: Model.extend({
-				ads: hasMany(),
+				ads: hasMany("ad"),
 			}),
 			ad: Model.extend({
-				gameId: belongsTo(),
+				gameId: belongsTo("game"),
 			}),
 		},
 
@@ -25,7 +26,7 @@ export function createFakeAPI() {
 				"title": "Just Chatting",
 				"banner": "https://static-cdn.jtvnw.net/ttv-boxart/509658-300x360.jpg",
 				"_count": {
-					"ads": 0
+					"ads": 2
 				}
 			});
 			server.create("game", {
@@ -33,7 +34,7 @@ export function createFakeAPI() {
 				"title": "APEX LEGENDS",
 				"banner": "https://static-cdn.jtvnw.net/ttv-boxart/511224_IGDB-210x280.jpg",
 				"_count": {
-					"ads": 0
+					"ads": 1
 				}
 			});
 			server.create("game", {
@@ -41,7 +42,7 @@ export function createFakeAPI() {
 				"title": "CS GO",
 				"banner": "https://static-cdn.jtvnw.net/ttv-boxart/32399_IGDB-300x360.jpg",
 				"_count": {
-					"ads": 0
+					"ads": 4
 				}
 			});
 			server.create("game", {
@@ -89,7 +90,7 @@ export function createFakeAPI() {
 				"title": "VALORANT",
 				"banner": "https://static-cdn.jtvnw.net/ttv-boxart/516575_IGDB-300x360.jpg",
 				"_count": {
-					"ads": 0
+					"ads": 6
 				}
 			});
 		},
@@ -104,13 +105,14 @@ export function createFakeAPI() {
 
 			this.post("/games/:id/ads", (schema, request) => {
 				let game = schema.find("game", request.params.id);
-				console.warn(game);
 
-				let attrs = JSON.parse(request.requestBody);
-				attrs.gameId = game;
-				console.warn(attrs);
+				const data = {
+					id: uuid(),
+					gameId: game,
+					...JSON.parse(request.requestBody)
+				}
 
-				return schema.create("ad", attrs);
+				return schema.create("ad", data);
 			})
 		},
 	})
