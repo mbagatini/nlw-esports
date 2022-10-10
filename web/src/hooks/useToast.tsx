@@ -1,5 +1,7 @@
 import * as ToastPrimitive from '@radix-ui/react-toast';
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { v4 as uuid } from 'uuid';
+
 import { Toast, ToastProps } from "../components/Toast";
 
 interface ToastContextData {
@@ -37,7 +39,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
 							title={toast.title}
 							message={toast.message}
 							toastType={toast.toastType}
-							key={toast.id}
+							key={uuid()}
 						/>
 					))}
 					<ToastPrimitive.Viewport className='fixed z-50 bottom-0 right-0 w-[390px] p-6 flex flex-col gap-2' />
