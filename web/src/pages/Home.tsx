@@ -54,7 +54,7 @@ export function Home() {
 				setGames(response.data);
 
 				// As the images were not ready, keen-slider needs to refresh the carousel
-				slider.current?.update();
+				setTimeout(() => slider.current?.update(), 100);
 			});
 	}, [])
 
