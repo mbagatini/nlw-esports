@@ -112,6 +112,10 @@ content-type: application/json
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
  </p>
  
+ ### App purpose
+
+- Create an ad to a game
+ 
  ### How to run it?
 
 Clone the repository to your machine.
@@ -150,6 +154,10 @@ If you want to connect to the backend project, comment the call to the function 
   <img src="https://img.shields.io/badge/Expo-1B1F23?style=for-the-badge&logo=expo&logoColor=white" />
  </p>
 
+### App purpose
+
+- Visualize ads created
+- Get ad's user Discord to connect with him
 
 ### How to run it?
 
