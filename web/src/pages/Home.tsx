@@ -23,7 +23,7 @@ interface Game {
 
 export function Home() {
 	const [games, setGames] = useState<Game[]>([]);
-	const [open, setOpen] = useState(false);
+	const [createAdModalOpen, setCreateAdModalOpen] = useState(false);
 
 	const [sliderRef, slider] = useKeenSlider(
 		{
@@ -56,7 +56,7 @@ export function Home() {
 				// As the images were not ready, keen-slider needs to refresh the carousel
 				setTimeout(() => slider.current?.update(), 100);
 			});
-	}, [])
+	}, [createAdModalOpen]);
 
 	return (
 		<div className="max-w-xs md:max-w-xl lg:max-w-4xl xl:max-w-[1180px] mx-auto my-20 flex flex-col items-center">
@@ -78,9 +78,9 @@ export function Home() {
 				))}
 			</div>
 
-			<Dialog.Root open={open} onOpenChange={setOpen}>
+			<Dialog.Root open={createAdModalOpen} onOpenChange={setCreateAdModalOpen}>
 				<CreateAdBanner />
-				<CreateAdModal games={games} setOpen={setOpen} />
+				<CreateAdModal games={games} setOpen={setCreateAdModalOpen} />
 			</Dialog.Root >
 		</div >
 	)
