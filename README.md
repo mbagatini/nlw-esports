@@ -1,4 +1,4 @@
-<p align="center">Next Level Week #9</p>
+<p align="center">Next Level Week #9 - Ignite</p>
 
 <h3 align="center">
   NLW eSports - Find your duo
