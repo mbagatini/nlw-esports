@@ -59,7 +59,7 @@ export function Home() {
 	}, [])
 
 	return (
-		<div className="max-w-xs md:max-w-xl lg:max-w-4xl xl:max-w-[1344px] mx-auto my-20 flex flex-col items-center">
+		<div className="max-w-xs md:max-w-xl lg:max-w-4xl xl:max-w-[1180px] mx-auto my-20 flex flex-col items-center">
 			<img src={logoImg} alt="Logo NLW eSports" />
 
 			<h1 className="text-3xl md:text-5xl lg:text-6xl text-white font-black mt-20">
