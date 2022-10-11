@@ -100,6 +100,9 @@ content-type: application/json
 
 # 💻 Front-end
 
+![brandbird (1)](https://user-images.githubusercontent.com/17517028/194982794-4a86e587-f7d7-4154-92a6-32684edd7871.png)
+
+
 ### Technology Stack
 
 <p align="left">
@@ -136,6 +139,8 @@ In order to deploy the application without deploying the backend server, [Mirage
 If you want to connect to the backend project, comment the call to the function `createFakeAPI` on `App.tsx`.
 
 # 📱 Mobile
+
+![mobile](https://user-images.githubusercontent.com/17517028/194978201-38bd9ce1-0fe8-4583-9a3e-32a7cad7a910.png)
 
 ### Technology Stack
 
