@@ -17,7 +17,7 @@
 
 You know when you are playing a game really cool and you want a friend to play it with you? Here it is.
 
-In this version of NLW, we are going to build an application to find game duos!
+In this version of NLW by [Rocketseat](https://www.rocketseat.com.br), we are going to build an application to find game duos!
 
 To find a duo, the person will create an ad to a game, providing the required info. The ones interested in playing the same game will check the ad details, if it's a duo match, they connect over Discord and start playing together. 
 
