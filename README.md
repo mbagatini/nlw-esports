@@ -13,7 +13,7 @@
 
 <img alt="NLW eSports" src="https://user-images.githubusercontent.com/17517028/194944504-f638f8ed-1942-4f0a-aaed-6eb601a74a2c.png" />
 
-# 💻 About this project
+# 🎮 About this project
 
 You know when you are playing a game really cool and you want a friend to play it with you? Here it is.
 
@@ -24,7 +24,7 @@ To find a duo, the person will create an ad to a game, providing the required in
 This is an entirely complete application, which includes the development of the server, web and mobile applications.
 
 
-# Backend
+# ⚙ Backend
 
 ### Technology Stack
 
@@ -66,7 +66,39 @@ If the configuration is ready and connected to the database, let's start the app
 $ npm run dev
 ```
 
-# Front-end
+### API routes
+
+Inside root folder, there is a file called `requests.http`. This file contains examples of requests to all API routes, as shown below:
+
+```txt
+# List all games
+GET http://localhost:3333/games HTTP/1.1
+
+# List all ads
+GET http://localhost:3333/ads HTTP/1.1
+
+# List ads for a specific game
+GET http://localhost:3333/games/80848e26-164b-4e28-8d01-64028fe5f3d4/ads HTTP/1.1
+
+# Get the discord username for the given ad
+GET http://localhost:3333/ads/4524a2eb-61f8-4b76-aa52-524c898a918c/discord HTTP/1.1
+
+# Create an ad
+POST http://localhost:3333/games/80848e26-164b-4e28-8d01-64028fe5f3d4/ads HTTP/1.1
+content-type: application/json
+
+{
+	"name": "player00",
+	"yearsPlaying": 4,
+	"discord": "letsplay",
+	"weekDays": [3,4,5],
+	"hourStart": "00:00",
+	"hourEnd": "06:00",
+	"useVoiceChannel": false
+}
+```
+
+# 💻 Front-end
 
 ### Technology Stack
 
@@ -97,7 +129,13 @@ Let's start the application:
 $ npm run dev
 ```
 
-# Mobile
+### Important note
+
+In order to deploy the application without deploying the backend server, [Mirage JS ](https://miragejs.com/) was used to mock the backend API.
+
+If you want to connect to the backend project, comment the call to the function `createFakeAPI` on `App.tsx`.
+
+# 📱 Mobile
 
 ### Technology Stack
 
@@ -131,13 +169,20 @@ $ expo start
 You can run the application directly on your phone, using the Expo Go app, or use an emulator.
 
 
-# 🔖 Application layout
+# 🎨 Application layout
 
 You can check the layout of this project clicking in the link below:
 
  - [Check on Figma](https://www.figma.com/file/pvnBIymuQKg2QIe5pYtEOE/NLW-eSports-(Community)?node-id=6%3A23)
 
 You must have Figma account to access it!
+
+# 🚀 Online app
+
+Wanna see the application online? 
+
+- [https://nlw-esports-morgs.vercel.app](https://nlw-esports-morgs.vercel.app)
+
 
 # 📝 License
 
