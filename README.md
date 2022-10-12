@@ -112,6 +112,13 @@ content-type: application/json
   <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
  </p>
  
+ 
+ Other libraries used:
+ - [React Hook Form](https://react-hook-form.com): form validation
+ - [Keen-Slider](https://keen-slider.io): carousel
+ - [Radix UI](https://www.radix-ui.com): accessible components unstyled components
+ - [Mirage JS](https://miragejs.com/): fake API
+ 
  ### App purpose
 
 - Create an ad to a game
