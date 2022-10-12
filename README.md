@@ -116,7 +116,7 @@ content-type: application/json
  Other libraries used:
  - [React Hook Form](https://react-hook-form.com): form validation
  - [Keen-Slider](https://keen-slider.io): carousel
- - [Radix UI](https://www.radix-ui.com): accessible components unstyled components
+ - [Radix UI](https://www.radix-ui.com): accessible unstyled components
  - [Mirage JS](https://miragejs.com/): fake API
  
  ### App purpose
